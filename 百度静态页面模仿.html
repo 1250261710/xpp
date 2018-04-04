@@ -1,0 +1,764 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<style type="text/css">
+  #body{
+     height: 100%;
+	 width:100%;
+     cursor: default;
+     position:relative;
+	 margin: 0;
+     padding: 0;
+	 font-family:arial;
+	 overflow:hidden;
+  }
+  #wrapper{
+    min-width: 1000px;
+  }
+  #top_nav{
+     <!-- width:100%; -->
+     position:absolute;
+     height:34px;
+	 border-bottom: 1px solid #ebebeb;
+	 <!-- box-sizing: content-box; -->
+	 height:32px;
+	 line-height:32px;
+  }
+  #left_menu{
+    float:left;
+	left:0;
+	top:0;
+	padding: 0px 10px;
+    color:#555;
+    font-size:12px;
+	cursor:pointer;
+  }
+  #show_weather{
+    float:left;
+	padding-right: 10px;
+  }
+  #other{
+    float:left;
+  }
+  #other a{
+    text-decoration:underline;
+	color:#555;
+  }
+  .weather_icon{
+    display:inline-block;
+    background-image:url("weather.png");
+	width:30px;
+	height:30px;
+	vertical-align: middle;
+	margin-left:-10px;
+  }
+  .weather_name{
+    color:#badc00;
+	font-weight:bold;
+  }
+  
+  #right_menu{
+    float:right;
+	cursor:pointer;
+  }
+  #link_menu a{
+    text-decoration:underline;
+    color:#555;
+	display: inline-block;
+    text-shadow: none;
+	height:32px;
+	line-height:32px;
+	font-weight:bold;
+	font-size:13px;
+	padding-right:15px;
+	text-align:right;
+  }
+  .user_name,.user_setting{
+    font-weight: normal;
+	position:relative;
+  }
+  #link_menu .more{
+    background:#398bfb;
+	width:86px;
+	height:32px;
+	line-height:32px;
+	color:white;
+	font-size:13px;
+	text-decoration:none;
+	text-align:center
+  }
+  
+  .namemenu_style div{
+    position:absolute;
+    display:none;
+	width:70px;
+	right:165px;
+    border: 1px solid #E3E3E3;
+	-webkit-box-shadow: 1px 1px 5px #d1d1d1;
+  }
+  #name_menu a,#set_menu a{
+    text-decoration:none;
+	font-weight:normal;
+	text-align: center;
+  }
+  #name_menu a:hover,#set_menu a:hover{
+    background: #38F;
+    color: #FFF;
+    text-decoration: none;
+  }
+  
+  .setmenu_style div{
+    position:absolute;
+    display:none;
+	width:70px;
+	text-align: left;
+	right:100px;
+    border: 1px solid #e3e3e3;
+	-webkit-box-shadow: 1px 1px 5px #d1d1d1;
+  }
+
+  .s_form{
+    width: 641px;
+    height: 100%;
+    min-height: 293px;
+    margin: 0 auto 0 auto;
+    text-align: left;
+    z-index: 100;
+  }
+  #center_logo{
+     position:relative;
+  }
+  #center_logo .s-p-top {
+    height: 61.8%;
+    min-height: 140px;
+    position: relative;
+    z-index: 0;
+    text-align: center;
+  }
+  .imgstyle{
+     position:absolute;
+     left:50%;
+	 margin-left:-135px;
+  }
+  
+  #form{
+     position:relative;
+	 padding:0;
+	 margin:0;
+	 display: block;
+  }
+  #kw{
+    width:480px!important;
+	height:20px;
+	padding:9px 7px;
+	font:16px arial;
+	border: 1px solid #b8b8b8;
+    border-bottom: 1px solid #ccc;
+    border-right: 0;
+    vertical-align: top;
+    outline: none;
+    box-shadow: none;
+  }
+  .photo{
+    z-index: 1;
+    position: absolute;
+	right:160px;
+    <!-- right: 11px; -->
+    top: 50%;
+    margin-top: 5px;
+    height: 32px;
+    width: 32px;
+    background: #fff;
+	background-image:url("photo.png");
+    cursor: pointer;
+  }
+  #s_btn{
+    
+    <!-- position:absolute; -->
+    <!-- width:102px: -->
+	<!-- height:38px; -->
+	
+    <!-- border: 1px solid #38f; -->
+    <!-- border-bottom: 1px solid #2e7ae5; -->
+	<!-- display: inline-block; -->
+	<!-- background: none; -->
+	
+    <!-- zoom: 1; -->
+    <!-- vertical-align: top; -->
+  }
+  #s_btn:hover{
+    border-bottom: 1px solid #2771d9;
+  }
+  .btn_style{
+     width:102px;
+	 height:39px;
+	 line-height:39px;
+	 background-color:#38f;
+	 border: 1px solid #38f;
+	 color:white;
+	 border: 1px solid #38f; 
+	 font-size:16px;
+	 font-family:arial;
+	 font-weight:normal;
+	 cursor:pointer;
+	 margin-left: -8px;
+  }
+  #s_main{
+    width: 893px;
+    margin: 0 auto;
+  }
+  #s_main_menu{
+    position: relative;
+    z-index: 11111;
+    
+    text-align: left;
+    font-size: 14px;
+    border-top: 1px solid #e9e9e9;
+    border-right: 1px solid #e9e9e9;
+    border-left: 1px solid #e9e9e9;
+    height: 39px;
+    line-height: 39px;
+  }
+  #s_menu_mine{
+     float:left;
+	 display: inline-block;
+	 width:124px;
+  }
+  .mine-icon{
+     margin: 11px 0 0 20px;
+     background-image:url("people.png");
+	 width:20px;
+	 height:18px;
+	 float:left;
+  }
+  .mine-text{
+     float:left;
+	 margin-left: 3px;
+	 color: #333;
+	 cursor:pointer;
+  }
+  
+  .s-menus-outer{
+     float:left;
+	 width: 719px;
+  }
+  .menus-wrapper{
+     float:left;
+	 display: inline-block;
+  }
+  .s-menu-item{
+    color: #333;
+    width: 80px;
+    height: 39px;
+    display: inline-block;
+    zoom: 1;
+    vertical-align: top;
+    text-align: center;
+    cursor: pointer;
+   }
+   .menus-wrapper span:hover{
+      background-color: #9a9da2;
+	  color: #fff;
+      font-weight: bold;
+   }
+   
+   #s_ctner_contents{
+      position:relative;
+	  min-height:363px;
+	  border: 1px solid #e9e9e9;
+   }
+   
+   
+   .s-news-rank-wrapper{
+      width: 300px;
+      margin-top: 20px;
+      text-align: left;
+   }
+   .s_newa_title{
+      height: 30px;
+      width: 270px;
+   }
+   .title_text{
+      float: left;
+      height: 22px;
+      width: 94px;
+      padding-top: 3px;
+      font-size: 14px;
+      font-weight: bold;
+	  font-family:arial;
+   }
+   .title_text a{
+     text-decoration:none;
+	 color: #333;
+   }
+   
+   .refresh{
+      display: block;
+      float: right;
+      height: 22px;
+      padding-top: 3px;
+      width: 60px;
+      cursor: pointer;
+   }
+   .refresh_icon{
+      width: 16px;
+      height: 16px;
+	  background:url("aui-icon-refresh.png");
+	  background-repeat:no-repeat;
+	  display: block;
+	  float:left;
+   }
+   .refresh_text{
+      font-size: 13px;
+      width: 40px;
+      text-align: center;
+      white-space: nowrap;
+   }
+   
+   .new_tips{
+      width: 100%;
+	  <!-- text-align:left; -->
+      position:relative;
+	  height:38px;
+	  display: inline-block;
+      zoom: 1;
+      vertical-align: middle;
+   }
+   .tips_content{
+      width: 187px;
+      padding-top: 15px;
+      margin: 0 auto;
+	  float:left;
+   }
+   .tips_content span{
+      font-size: 13px;
+      color: rgba(0, 0, 0, .4);
+   }
+   .baidu_icon{
+      float:left;
+	  margin-top: 12px;
+
+      background-image:url("baidu_small.png") ;
+	  background-repeat:no-repeat;
+	  height:25px;
+	  width:25px;
+   }
+   .left-line,.right-line{
+     height: 0;
+     width: 172px;
+     font-size: 0;
+     border-bottom: 1px solid #e2e2e2;
+     margin-top: 21px;
+	 float:left;
+   }
+   .s_news_list{
+     width:538px;
+	 float:left;
+   }
+   .s_title_font{
+     font-size: 18px;
+     font-family: arial, "Microsoft Yahei", 微软雅黑;
+	 width:508px;
+	 display: inline-block;
+	 white-space: nowrap;
+	 color: #333;
+     font-weight: bold;
+     line-height: 20px;
+	 text-decoration: none;
+   }
+   .s_title_font:hover{
+      color:#3388ff;
+      text-decoration: underline;
+   }
+   
+   .s_pic_content{
+     width:540px;
+	 height:119px
+   }
+   .s_pic_content ul{
+      list-style:none;
+	  padding: 0px;
+   }
+   .item-img-wrap{
+     float:left;
+	 width:180px;
+	 cursor:pointer;
+   }
+   .s-news-img{
+     width:179px;
+	 height:119px;
+   }
+   .s_news_list,.s_news_item{
+      position: relative;
+	  border:none;
+   }
+   .s_news_item h2{
+      padding-bottom: -15px;
+	  margin-top:8px;
+   }
+   .new_tips,.water_content{
+     padding: 0 25px 0 25px;
+   }
+   .s_news_form{
+     color: rgba(0,0,0,0.4);
+	 line-height: 15px;
+     font-size: 13px;
+	 padding-top:16px;
+   }
+   .src_sutho a{
+     text-decoration:none; 
+	 color: rgba(0,0,0,0.4);
+   }
+   .s-news-rank-content{
+      position: relative;
+      list-style: disc;
+	  margin:0px;
+	  padding:0px;
+	  display: block;
+   }
+   .news-meta-item{
+     width: 145px;
+     margin-right: 3px;
+     display: inline-block;
+     zoom: 1;
+     list-style: square;
+	 text-align: -webkit-match-parent;
+	 float:left;
+   }
+   .item_link{
+     display:block;
+     float:left;
+	 font-size:14px;
+	 line-height: 34px;
+   }
+   .item_link a{
+     text-decoration:none;
+	 color:#333;
+	 text-overflow: ellipsis;
+	 
+   }
+   .item_link a:hover{
+     color:#38f;
+   }
+</style>
+</head>
+<body>
+<div id="wrapper">
+   <div id="top_nav">
+     <div id="left_menu">
+	   <div id="show_weather">
+	     <span>南京：</span>
+		 <span class="weather_icon"></span>
+		 <span>27℃</span>
+		 <span class="weather_name">良</span>
+		 <span>92</span>
+		 <span>|</span>
+	   </div>
+	   <div id="other">
+	     <a href="#"><span>换肤</span></a>
+		 <a href="#"><span>消息</span></a>
+	   </div>
+	 </div>
+	 <div id="right_menu">
+	   <div id="link_menu">
+	     <a href="http://news.baidu.com"><span>新闻</span></a>
+		 <a href="http://www.hao123.com"><span>hao123</span></a>
+		 <a href="http://map.baidu.com"><span>地图</span></a>
+		 <a href="http://v.baidu.com"><span>视频</span></a>
+		 <a href="http://tieba.baidu.com"><span>贴吧</span></a>
+		 <a href="http://xueshu.baidu.com"><span>学术</span></a>
+		 <a><span class="user_name">萍水相逢</span></a>
+		 <a><span class="user_setting">设置</span></a>
+		 <a href="http://www.baidu.com/more/" class="more">更多产品</a>
+		 <div id="name_menu" class="namemenu_style">
+		  <div>
+		   <a href="http://i.baidu.com/center">个人中心</a>
+		   <a href="http://passport.baidu.com/">账号设置</a>
+		   <a href="">意见反馈</a>
+		   <a href="">退出</a>
+		  </div>
+		 </div>
+	     <div id="set_menu" class="setmenu_style">
+		   <div>
+		    <a href="JavaScript:;">搜索设置</a>
+		    <a href="//www.baidu.com/gaoji/advanced.html">高级设置</a>
+		    <a href="JavaScript:;">关闭预测</a>
+		    <a href="http://i.baidu.com/my/history?from=ps">搜索历史</a>
+		  </div>
+		 </div>
+	   </div>
+	   <div>
+	   </div>
+	 </div>
+   </div>   
+   <div class="s_form">
+     <div id="center_logo">
+       <div class="s-p-top">
+	     <img class="imgstyle" src="bd_logo1.png" width="270" height="129">
+	   </div>
+       <form id="form">
+	     <span class="photo"></span>
+	     <span id="inputstyle">
+	       <input type="text" id="kw"></input>
+	     </span>
+	     <span id="s_btn">
+	       <input type="button" value="百度一下" class="btn_style" >
+	     </span>
+	   </form>
+     </div>
+   </div>
+   <div id="s_main" style="margin-top:-50px">
+      <div id="s_main_menu">
+	     <span id="s_menu_mine">
+		   <div class="mine-icon"></div>
+		   <div class="mine-text">我的关注</div>
+		 </span>
+		 <div class="s-menus-outer">
+		    <div class="menus-wrapper">
+			   <span class="s-menu-item">推荐</span>
+			   <span class="s-menu-item">导航</span>
+			</div>
+			<div>
+			</div>
+		 </div>
+	  </div>
+	  <div id="s_ctner_contents">
+	      <div class="s-news-rank-wrapper" style="position: absolute; top: 0px; right: 5px;">
+		    <div class="s_newa_title">
+			   <div class="title_text">
+			     <a href="http://top.baidu.com/?fr=mhd_card">实时热点</a>
+			   </div>
+			   <a class="refresh"> 
+			      <span class="refresh_icon"></span>
+				  <span class="refresh_text">换一换</span>
+			   </a>
+			</div>
+		    <ul class="s-news-rank-content">
+			  <li class="news-meta-item"> 
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E5%B4%94%E6%99%BA%E5%8F%8B%E8%80%81%E5%85%AC%E8%A2%AB%E6%9B%9D&rsv_idx=2" target="_blank">崔智友老公被曝</a>
+				</span>
+			  </li>
+			  <li class="news-meta-item">
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E8%8B%8F%E6%A0%BC%E5%85%B0%E7%8E%B0%E6%81%90%E9%BE%99%E8%84%9A%E5%8D%B0&rsv_idx=2" target="_blank">苏格兰现恐龙脚印</a>
+				</span>
+			  </li>
+			  <li class="news-meta-item">
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E8%8B%B1%E7%89%B9%E5%B0%94%E6%8E%A8%E9%85%B7%E7%9D%BF%E5%85%AB%E4%BB%A3&rsv_idx=2" target="_blank">英特尔推酷睿八代</a>
+				</span>
+			  </li>
+			  <li class="news-meta-item">
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E5%AE%BF%E7%AE%A1%E8%B4%B4%E6%B5%B7%E6%8A%A5%E7%A6%81%E4%BA%B2%E4%BA%B2&rsv_idx=2" target="_blank">宿管贴海报禁亲亲</a>
+				</span>
+			  </li>
+			  <li class="news-meta-item">
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E7%94%B7%E5%AD%90%E5%86%B0%E5%A3%B6%E4%B8%8D%E6%95%8C%E6%97%A5%E6%9C%AC&rsv_idx=2" target="_blank">男子冰壶不敌日本</a>
+				</span>
+			  </li>
+			  <li class="news-meta-item">
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E5%88%B9%E8%BD%A6%E5%A4%B1%E7%81%B5%E6%AF%8D%E5%AD%90%E8%B7%B3%E8%BD%A6&rsv_idx=2" target="_blank">刹车失灵母子跳车</a>
+				</span>
+			  </li>
+			  <li class="news-meta-item">
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E5%9C%86%E6%98%8E%E5%9B%AD%E8%B8%8F%E6%98%A5%E8%8A%82%E5%BC%80%E5%B9%95&rsv_idx=2" target="_blank">圆明园踏春节开幕</a>
+				</span>
+			  </li>
+			  <li class="news-meta-item">
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E7%BD%91%E5%8F%8B%E5%81%B6%E9%81%87%E6%B1%9F%E7%96%8F%E5%BD%B1&rsv_idx=2" target="_blank">网友偶遇江疏影</a>
+				</span>
+			  </li>
+			  <li class="news-meta-item">
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E6%9B%BC%E8%81%94%E4%BB%8A%E5%A4%8F%E8%B5%B4%E7%BE%8E%E7%83%AD%E8%BA%AB&rsv_idx=2" target="_blank">曼联今夏赴美热身</a>
+				</span>
+			  </li>
+			  <li class="news-meta-item">
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E4%BA%AC%E6%B4%A5%E5%9F%8E%E9%99%85%E7%A5%A8%E4%BB%B7%E4%B8%8A%E6%B6%A8&rsv_idx=2" target="_blank">京津城际票价上涨</a>
+				</span>
+			  </li>
+			  
+			  <li class="news-meta-item">
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E6%9D%83%E5%81%A5%E8%BF%9E%E6%94%B63%E5%BC%A0%E7%BD%9A%E5%8D%95&rsv_idx=2" target="_blank">权健连收3张罚单</a>
+				</span>
+			  </li>
+			  <li class="news-meta-item">
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E5%AD%99%E4%BF%AA%E8%8E%B7%E6%9C%80%E4%BD%B3%E5%A5%B3%E6%BC%94%E5%91%98&rsv_idx=2" target="_blank">孙俪获最佳女演员</a>
+				</span>
+			  </li>
+			  <li class="news-meta-item">
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E6%96%B0%E7%96%86PPP%E9%A1%B9%E7%9B%AE%E5%81%9C%E5%B7%A5&rsv_idx=2" target="_blank">新疆PPP项目停工</a>
+				</span>
+			  </li>
+			  <li class="news-meta-item">
+			    <span class="item_link">
+				  <a href="https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=%E7%BE%8E%E7%94%B7%E5%AD%A9%E5%9D%A0%E5%85%A5%E4%B8%8B%E6%B0%B4%E9%81%93&rsv_idx=2" target="_blank">美男孩坠入下水道</a>
+				</span>
+			  </li>
+			  
+			</ul>
+		  </div>
+	      <div class="new_tips">
+	        <div class="left-line"></div>
+			<div class="baidu_icon"></div>
+		    <div class="tips_content"><span>以下信息根据您的兴趣推荐</span></div>
+		    <div class="right-line"></div>
+	      </div>
+	      <div class="water_content">
+		     <div class="s_news_list">
+			    <div class="s_news_item">
+				    <h2>
+					  <a href="https://mbd.baidu.com/newspage/data/landingsuper?context=%7B%22nid%22%3A%22news_7156897618233673931%22%7D&n_type=0&p_from=1" class="s_title_font" target="_blank">奥沙利文中国赛再轰147分：中国太棒了，给我一个绿卡吧</a>
+					</h2>
+				    <div class="s_pic_content">
+					   <ul>
+					      <li class="item-img-wrap">
+						     <a>
+							   <img class="s-news-img" src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=68803315,2035851115&fm=173&app=12&f=JPEG?w=218&h=146&s=1A41B3484301294593484C1C030010D5">
+							 </a>
+						  </li>
+						  <li class="item-img-wrap">
+						     <a>
+							   <img class="s-news-img" src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=3736234328,2507644392&fm=173&app=12&f=JPEG?w=218&h=146&s=D4C1B9444D4131573CE92C820300E094">
+							 </a>
+						  </li>
+						  <li class="item-img-wrap">
+						     <a>
+							   <img class="s-news-img" src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2672382883,426478302&fm=173&app=12&f=JPEG?w=218&h=146&s=9E41A944376A8B5540C9AC820300C081">
+							 </a>
+						  </li>
+					   </ul>
+					</div>
+					<div class="s_news_form">
+					  <span class="src_sutho">
+					     <a href="http://www.thepaper.cn">澎湃新闻</a>
+					  <span>
+					  <span class="src-time">04-04 12:53<span>
+					</div>
+				</div>
+				<div class="s_news_item">
+				    <h2>
+					  <a href="https://mbd.baidu.com/newspage/data/landingsuper?context=%7B%22nid%22%3A%22news_9835331445521986779%22%7D&n_type=0&p_from=1" class="s_title_font" target="_blank">京东无界零售店初体验，消费者的懒或许是你想不到的！</a>
+					</h2>
+				    <div class="s_pic_content">
+					   <ul>
+					      <li class="item-img-wrap">
+						     <a>
+							   <img class="s-news-img" src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=848165103,2649222718&fm=173&app=25&f=JPEG?w=218&h=146&s=5D0E00D64E4B7EDC10A199FF0300501D">
+							 </a>
+						  </li>
+						  <li class="item-img-wrap">
+						     <a>
+							   <img class="s-news-img" src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=7378594,807913131&fm=173&app=25&f=JPEG?w=218&h=146&s=F7D05B8D4E415ADE643D2FEB03005016">
+							 </a>
+						  </li>
+						  <li class="item-img-wrap">
+						     <a>
+							   <img class="s-news-img" src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=697434792,3933053175&fm=173&app=25&f=JPEG?w=218&h=146&s=9CB64892545233CC51BEA3BC0300401D">
+							 </a>
+						  </li>
+					   </ul>
+					</div>
+					<div class="s_news_form">
+					  <span class="src_sutho">
+					     <a href="http://baijiahao.baidu.com"> iambillbil </a>
+					  <span>
+					  <span class="src-time">04-04 07:55<span>
+					</div>
+				</div>
+				<div class="s_news_item">
+				    <h2>
+					  <a href="https://mbd.baidu.com/newspage/data/landingsuper?context=%7B%22nid%22%3A%22news_9709360810576976922%22%7D&n_type=0&p_from=1" class="s_title_font" target="_blank">万万没想到，马云这一次看走眼了，而刘强东赌对了？</a>
+					</h2>
+				    <div class="s_pic_content">
+					   <ul>
+					      <li class="item-img-wrap">
+						     <a>
+							   <img class="s-news-img" src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=176581003,3461292070&fm=173&app=25&f=JPEG?w=218&h=146&s=329371CCDE1210D40360F518030020DB">
+							 </a>
+						  </li>
+						  <li class="item-img-wrap">
+						     <a>
+							   <img class="s-news-img" src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1343486742,1928910785&fm=173&app=25&f=JPEG?w=218&h=146&s=7C28A6544C83C4514A9AF0FF03004019">
+							 </a>
+						  </li>
+						  <li class="item-img-wrap">
+						     <a>
+							   <img class="s-news-img" src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4256107004,3337093379&fm=173&app=25&f=JPEG?w=218&h=146&s=540BE8B60CE73E96329DE4870300F094">
+							 </a>
+						  </li>
+					   </ul>
+					</div>
+					<div class="s_news_form">
+					  <span class="src_sutho">
+					     <a href="http://baijiahao.baidu.com">  俊世太保  </a>
+					  <span>
+					  <span class="src-time">04-04 13:17<span>
+					</div>
+				</div>
+			 </div>
+		  </div>
+	  </div> 
+   </div>
+</div>
+<script>
+
+   var timer; 
+   window.onload=function(){
+     var user_name=document.getElementById("link_menu").getElementsByClassName("user_name")[0]
+	 var selfcenter=document.getElementById("name_menu").getElementsByTagName("div")[0]
+	 //用户移入移出
+	 user_name.onmouseover=function(){
+	   <!-- selfcenter.style.right=user_name.getBoundingClientRect().left+"px"; -->
+	   selfcenter.style.display="block"
+	   
+	 }
+	 user_name.onmouseout=function(){
+	   timer=setTimeout(function(){
+	     selfcenter.style.display="none" 
+	   },150)
+	 }
+	 selfcenter.onmouseover=function(){
+	   clearTimeout(timer)
+	   selfcenter.style.display="block"
+	 }
+	 selfcenter.onmouseout=function(){
+	   selfcenter.style.display="none"
+	 }
+     //设置移入移出
+	 var settimer
+	 var user_set=document.getElementById("link_menu").getElementsByClassName("user_setting")[0]
+	 var set_menu=document.getElementById("set_menu").getElementsByTagName("div")[0]
+	 user_set.onmouseover=function(){
+	   set_menu.style.display="block"
+	 }
+	 user_set.onmouseout=function(){
+	   settimer=setTimeout(function(){
+	     set_menu.style.display="none" 
+	   },150)
+	 }
+	 set_menu.onmouseover=function(){
+	   clearTimeout(settimer)
+	   set_menu.style.display="block"
+	 }
+	 set_menu.onmouseout=function(){
+	   set_menu.style.display="none"
+	 }
+   }
+ 
+
+</script>
+</body>
+</html>
